@@ -1,6 +1,10 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics
+from .models import User
+from .serializers import RegisterSerializer
 
-@api_view(['GET'])
-def hello_world(request):
-    return Response({"message": "JamieChupaPinga 👻👻"})
+@method_decorator(csrf_exempt, name='dispatch')
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer

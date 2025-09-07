@@ -72,10 +72,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'AgroTrack.wsgi.application'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",   # React dev
-    "https://tu-dominio.com",  # Producción
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -90,6 +91,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+AUTH_USER_MODEL = "Home.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -130,4 +132,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 

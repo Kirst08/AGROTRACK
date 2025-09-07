@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Layout from "./layout";
+import RegisterForm from "./register";
+import LoginForm from "./Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/hello/")
-      .then((response) => setMessage(response.data.message))
-      .catch((error) => console.error(error));
-  }, []);
-
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>{message || "Cargando..."}</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />} />
+        <Route path="/Register" element={<RegisterForm />} />
+        <Route path="login" element={<LoginForm />} />
+      </Routes>
+    </Router>
   );
 }
-
 export default App;
